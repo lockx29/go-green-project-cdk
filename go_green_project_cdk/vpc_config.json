@@ -1,0 +1,16 @@
+{
+    "vpc_name": "VPC",
+    "nat_name": "NAT",
+    "public_subnet_names": [
+        "AZ1-WebPublic",
+        "AZ2-WebPublic"
+    ],
+    "app_private_subnet_names": [
+        "AZ1-AppPrivate",
+        "AZ2-AppPrivate"
+    ],
+    "db_private_subnet_names": [
+        "AZ1-DbPrivate",
+        "AZ2-DbPrivate"
+    ]
+}
