@@ -2,7 +2,6 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_elasticloadbalancingv2 as elbv2,
     aws_autoscaling as autoscaling,
-    aws_ecs as ecs,
     core as cdk
 )
 
@@ -17,7 +16,10 @@ class WebStack(cdk.Stack):
             instance_type=ec2.InstanceType("t2.large"),
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=2,
-            max_capacity=6
+            max_capacity=6,
+            vpc_subnets=ec2.SubnetSelection(
+                subnet_group_name="WebTier"  # This ensures instances are created in WebTier subnets
+            )
         )
 
         # Create Elastic Load Balancer
@@ -31,3 +33,4 @@ class WebStack(cdk.Stack):
 
         # Auto-scaling policies
         asg.scale_on_cpu_utilization("CpuScaling", target_utilization_percent=50)
+

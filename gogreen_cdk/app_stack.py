@@ -13,16 +13,19 @@ class AppStack(cdk.Stack):
         # Create Auto Scaling Group for App Tier
         asg = autoscaling.AutoScalingGroup(self, "AppAsg",
             vpc=vpc,
-            instance_type=ec2.InstanceType("m5.large"),
+            instance_type=ec2.InstanceType("r3.2xlarge"),  # Changed instance type to r3.2xlarge
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=3,
-            max_capacity=6
+            max_capacity=6,
+            vpc_subnets=ec2.SubnetSelection(
+                subnet_group_name="AppTier"  # Ensures instances are created in AppTier subnets
+            )
         )
 
         # Application Load Balancer for App Tier
         lb = elbv2.ApplicationLoadBalancer(self, "AppElb",
             vpc=vpc,
-            internet_facing=False
+            internet_facing=False  # Internal ALB for app-tier
         )
 
         listener = lb.add_listener("Listener", port=8080)
@@ -30,3 +33,4 @@ class AppStack(cdk.Stack):
 
         # Auto-scaling policies
         asg.scale_on_cpu_utilization("CpuScaling", target_utilization_percent=50)
+
