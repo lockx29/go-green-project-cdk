@@ -14,9 +14,7 @@ class DatabaseStack(cdk.Stack):
             engine=rds.DatabaseInstanceEngine.mysql(
                 version=rds.MysqlEngineVersion.VER_8_0_28  # MySQL version 8.0
             ),
-            instance_type=ec2.InstanceType.of(
-                ec2.InstanceClass.MEMORY5, ec2.InstanceSize.XLARGE2  # r5.2xlarge instance (8 vCPUs, 32 GB RAM)
-            ),
+            instance_type=ec2.InstanceType("db.t3.2xlarge"),  # Set instance type to db.t3.2xlarge
             vpc=vpc,
             vpc_subnets=ec2.SubnetSelection(
                 subnet_group_name="DatabaseTier"  # Ensures the RDS instance is created in DatabaseTier subnets

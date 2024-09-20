@@ -13,7 +13,7 @@ class AppStack(cdk.Stack):
         # Create Auto Scaling Group for App Tier
         asg = autoscaling.AutoScalingGroup(self, "AppAsg",
             vpc=vpc,
-            instance_type=ec2.InstanceType("r3.2xlarge"),  # Changed instance type to r3.2xlarge
+            instance_type=ec2.InstanceType("t3.2xlarge"),  # Changed instance type to t3.2xlarge
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=3,
             max_capacity=6,
@@ -33,4 +33,3 @@ class AppStack(cdk.Stack):
 
         # Auto-scaling policies
         asg.scale_on_cpu_utilization("CpuScaling", target_utilization_percent=50)
-

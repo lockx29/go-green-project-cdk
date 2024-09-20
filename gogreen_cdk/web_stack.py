@@ -13,13 +13,10 @@ class WebStack(cdk.Stack):
         # Create Auto Scaling Group for Web Tier
         asg = autoscaling.AutoScalingGroup(self, "WebAsg",
             vpc=vpc,
-            instance_type=ec2.InstanceType("t2.large"),
+            instance_type=ec2.InstanceType("t3.large"),  # Changed instance type to t3.large
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=2,
-            max_capacity=6,
-            vpc_subnets=ec2.SubnetSelection(
-                subnet_group_name="WebTier"  # This ensures instances are created in WebTier subnets
-            )
+            max_capacity=6
         )
 
         # Create Elastic Load Balancer
