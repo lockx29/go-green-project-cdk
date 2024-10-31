@@ -2,12 +2,13 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_autoscaling as autoscaling,
     aws_elasticloadbalancingv2 as elbv2,
-    core as cdk
+    Stack
 )
+from constructs import Construct
 
-class AppStack(cdk.Stack):
+class AppStack(Stack):
 
-    def __init__(self, scope: cdk.Construct, id: str, vpc, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, vpc, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         # Create Auto Scaling Group for App Tier
@@ -33,3 +34,4 @@ class AppStack(cdk.Stack):
 
         # Auto-scaling policies
         asg.scale_on_cpu_utilization("CpuScaling", target_utilization_percent=50)
+

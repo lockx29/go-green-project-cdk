@@ -2,12 +2,13 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_elasticloadbalancingv2 as elbv2,
     aws_autoscaling as autoscaling,
-    core as cdk
+    Stack
 )
+from constructs import Construct
 
-class WebStack(cdk.Stack):
+class WebStack(Stack):
 
-    def __init__(self, scope: cdk.Construct, id: str, vpc, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, vpc, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         # Create Auto Scaling Group for Web Tier
