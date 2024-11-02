@@ -14,7 +14,7 @@ class WebStack(Stack):
         # Create Auto Scaling Group for Web Tier
         asg = autoscaling.AutoScalingGroup(self, "WebAsg",
             vpc=vpc,
-            instance_type=ec2.InstanceType("t3.large"),  # Changed instance type to t3.large
+            instance_type=ec2.InstanceType("t3.micro"),  # Changed instance type to t3.large in actual implementation
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=2,
             max_capacity=6

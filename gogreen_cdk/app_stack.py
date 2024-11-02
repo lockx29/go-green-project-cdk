@@ -14,7 +14,7 @@ class AppStack(Stack):
         # Create Auto Scaling Group for App Tier
         asg = autoscaling.AutoScalingGroup(self, "AppAsg",
             vpc=vpc,
-            instance_type=ec2.InstanceType("t3.2xlarge"),  # Changed instance type to t3.2xlarge
+            instance_type=ec2.InstanceType("t3.micro"),  # Changed instance type to t3.2xlarge in actual implementation
             machine_image=ec2.AmazonLinuxImage(),
             min_capacity=3,
             max_capacity=6,
